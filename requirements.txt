@@ -1,0 +1,4 @@
+opencv-python
+numpy
+firebase-admin
+google-cloud-firestore
