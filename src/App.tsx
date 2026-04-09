@@ -34,8 +34,25 @@ import {
   FileDown,
   Printer,
   ChevronRight,
-  Building2
+  Building2,
+  BarChart3,
+  TrendingUp,
+  Calendar
 } from "lucide-react";
+import { 
+  ResponsiveContainer, 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  BarChart, 
+  Bar, 
+  Cell,
+  PieChart,
+  Pie
+} from 'recharts';
 import { 
   auth, 
   db, 
@@ -96,6 +113,43 @@ interface EventLog {
   location?: string;
   aiAnalysis?: string;
 }
+
+// --- Mock Chart Data ---
+const DAILY_ACTIVITY = [
+  { time: '00:00', events: 2, weirdness: 0.01 },
+  { time: '04:00', events: 1, weirdness: 0.005 },
+  { time: '08:00', events: 8, weirdness: 0.02 },
+  { time: '12:00', events: 12, weirdness: 0.04 },
+  { time: '16:00', events: 15, weirdness: 0.03 },
+  { time: '20:00', events: 22, weirdness: 0.08 },
+  { time: '23:59', events: 5, weirdness: 0.02 },
+];
+
+const WEEKLY_TRENDS = [
+  { day: 'Mon', total: 45, critical: 2 },
+  { day: 'Tue', total: 52, critical: 1 },
+  { day: 'Wed', total: 38, critical: 0 },
+  { day: 'Thu', total: 65, critical: 4 },
+  { day: 'Fri', total: 88, critical: 7 },
+  { day: 'Sat', total: 72, critical: 3 },
+  { day: 'Sun', total: 41, critical: 1 },
+];
+
+const MONTHLY_DATA = [
+  { month: 'Jan', events: 1200 },
+  { month: 'Feb', events: 1100 },
+  { month: 'Mar', events: 1400 },
+  { month: 'Apr', events: 1800 },
+  { month: 'May', events: 2100 },
+  { month: 'Jun', events: 1900 },
+];
+
+const SEVERITY_DATA = [
+  { name: 'Low', value: 400, color: '#3b82f6' },
+  { name: 'Medium', value: 300, color: '#f59e0b' },
+  { name: 'High', value: 150, color: '#ef4444' },
+  { name: 'Critical', value: 50, color: '#7f1d1d' },
+];
 
 interface WeirdnessConfig {
   normalHours: number[];
@@ -1242,7 +1296,169 @@ export default function App() {
             </div>
 
             {dashboardTab === 'overview' && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="space-y-8">
+                {/* Analytics Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="lg:col-span-2 glass-card p-6 security-gradient">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-lg font-bold flex items-center gap-2">
+                        <TrendingUp className="text-brand-orange w-5 h-5" />
+                        Activity Trends
+                      </h3>
+                      <div className="flex gap-2">
+                        <span className="px-2 py-1 rounded bg-brand-orange/10 border border-brand-orange/20 text-[10px] font-bold text-brand-orange uppercase">Real-time</span>
+                      </div>
+                    </div>
+                    <div className="h-[300px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={DAILY_ACTIVITY}>
+                          <defs>
+                            <linearGradient id="colorEvents" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#f97316" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#f97316" stopOpacity={0}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+                          <XAxis 
+                            dataKey="time" 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <YAxis 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <Tooltip 
+                            contentStyle={{ backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '8px', fontSize: '12px' }}
+                            itemStyle={{ color: '#f97316' }}
+                          />
+                          <Area 
+                            type="monotone" 
+                            dataKey="events" 
+                            stroke="#f97316" 
+                            fillOpacity={1} 
+                            fill="url(#colorEvents)" 
+                            strokeWidth={3}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+
+                  <div className="glass-card p-6">
+                    <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                      <BarChart3 className="text-brand-orange w-5 h-5" />
+                      Severity Distribution
+                    </h3>
+                    <div className="h-[200px] w-full mb-6">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie
+                            data={SEVERITY_DATA}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={60}
+                            outerRadius={80}
+                            paddingAngle={5}
+                            dataKey="value"
+                          >
+                            {SEVERITY_DATA.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Pie>
+                          <Tooltip 
+                            contentStyle={{ backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '8px', fontSize: '12px' }}
+                          />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="space-y-3">
+                      {SEVERITY_DATA.map((item) => (
+                        <div key={item.name} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                            <span className="text-xs text-zinc-400">{item.name}</span>
+                          </div>
+                          <span className="text-xs font-mono font-bold">{item.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-3 glass-card p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-lg font-bold flex items-center gap-2">
+                        <Calendar className="text-brand-orange w-5 h-5" />
+                        Weekly Incident Volume
+                      </h3>
+                    </div>
+                    <div className="h-[200px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={WEEKLY_TRENDS}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+                          <XAxis 
+                            dataKey="day" 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <YAxis 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <Tooltip 
+                            cursor={{ fill: '#ffffff05' }}
+                            contentStyle={{ backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '8px', fontSize: '12px' }}
+                          />
+                          <Bar dataKey="total" fill="#f97316" radius={[4, 4, 0, 0]} />
+                          <Bar dataKey="critical" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-3 glass-card p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-lg font-bold flex items-center gap-2">
+                        <Activity className="text-brand-orange w-5 h-5" />
+                        Monthly Volume (6-Month View)
+                      </h3>
+                    </div>
+                    <div className="h-[150px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={MONTHLY_DATA}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+                          <XAxis 
+                            dataKey="month" 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <YAxis 
+                            stroke="#71717a" 
+                            fontSize={10} 
+                            tickLine={false} 
+                            axisLine={false} 
+                          />
+                          <Tooltip 
+                            contentStyle={{ backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '8px', fontSize: '12px' }}
+                          />
+                          <Area type="stepAfter" dataKey="events" stroke="#f97316" fill="#f97316" fillOpacity={0.1} />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Reports List */}
                 <div className="lg:col-span-2 space-y-6">
                   <h3 className="text-xl font-bold flex items-center gap-2">
@@ -1362,9 +1578,10 @@ export default function App() {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {dashboardTab === 'weirdness' && (
+          {dashboardTab === 'weirdness' && (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-6">
                   <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-8">
