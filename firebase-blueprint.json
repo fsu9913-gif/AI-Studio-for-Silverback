@@ -122,6 +122,18 @@
         "role": { "type": "string", "enum": ["admin", "viewer"] }
       },
       "required": ["uid", "email", "role"]
+    },
+    "Tenant": {
+      "title": "Tenant",
+      "description": "Information about a tenant in the building.",
+      "type": "object",
+      "properties": {
+        "unit": { "type": "string" },
+        "name": { "type": "string" },
+        "numericId": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "moved_out"] }
+      },
+      "required": ["unit", "name", "numericId", "status"]
     }
   },
   "firestore": {
@@ -136,6 +148,10 @@
     "/users/{userId}": {
       "schema": "UserProfile",
       "description": "Authorized user profiles."
+    },
+    "/tenants/{tenantId}": {
+      "schema": "Tenant",
+      "description": "Collection of tenants."
     },
     "/config/weirdness": {
       "schema": "WeirdnessConfig",

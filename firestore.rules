@@ -43,6 +43,14 @@ service cloud.firestore {
     //   - highSeverityCount: integer (optional)
     //   - status: string (optional, enum: ['generated', 'emailed', 'downloaded'])
     //
+    // Collection: /tenants/{tenantId}
+    // Document ID: auto-generated
+    // Fields:
+    //   - unit: string (required)
+    //   - name: string (required)
+    //   - numericId: string (required)
+    //   - status: string (required, enum: ['active', 'moved_out'])
+    //
     // ===============================================================
 
     // ===============================================================
@@ -108,6 +116,14 @@ service cloud.firestore {
              data.eventCount is int;
     }
 
+    function isValidTenant(data) {
+      return data.keys().hasAll(['unit', 'name', 'numericId', 'status']) &&
+             data.unit is string && data.unit.size() > 0 && data.unit.size() < 50 &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.numericId is string && data.numericId.size() > 0 && data.numericId.size() < 50 &&
+             data.status in ['active', 'moved_out'];
+    }
+
     // ===============================================================
     // Match Rules
     // ===============================================================
@@ -126,6 +142,12 @@ service cloud.firestore {
     match /security_reports/{reportId} {
       allow read: if isAuthenticated();
       allow create: if isAdmin() && isValidSecurityReport(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    match /tenants/{tenantId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() && isValidTenant(request.resource.data);
       allow update, delete: if isAdmin();
     }
 

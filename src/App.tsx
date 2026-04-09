@@ -207,6 +207,12 @@ function PresentationView({ onClose, currentSlide, setCurrentSlide }: { onClose:
       subtitle: "Clear Communication",
       content: "We tell tenants upfront: The AI protects the building, but it doesn't spy on you. Faces are obscured, and footage is only pulled for 'outside normal operations' events.",
       bg: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=1200"
+    },
+    {
+      title: "100x More Solid As An Owner",
+      subtitle: "The Pay Back Package",
+      content: "Insurance deductions on proactive, digital safeguards with timestamps and papertrails that can't be defeated. More profitable per unit after savings, better tenants, and offboarding the bad ones.",
+      bg: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1200"
     }
   ];
 
@@ -1163,38 +1169,46 @@ export default function App() {
               </div>
             </section>
 
-            {/* Privacy Section */}
-            <section id="privacy" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
+            {/* ROI & Insurance Section */}
+            <section id="roi" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
               <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
                 <div className="flex-1">
-                  <h2 className="text-3xl md:text-5xl font-bold mb-8">Security Without Surveillance</h2>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-medium text-green-500 mb-6 uppercase tracking-widest">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+                    Maximized Owner ROI
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-bold mb-8">100x More Solid As An Owner.</h2>
                   <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
-                    We believe privacy is a human right. Silverback AI uses advanced anonymization 
-                    techniques to track events and behaviors without storing personal identity data 
-                    unless a security breach is detected.
+                    Insurance deductions on proactive, digital safeguards with timestamps and papertrails that can't be defeated (unless in Oakland). This is what tenants of any caliber expect in rentals in 2026.
                   </p>
                   <ul className="space-y-4">
                     {[
-                      "Local-only data processing",
-                      "Automatic face blurring for non-events",
-                      "Encrypted evidence storage",
-                      "GDPR & CCPA compliant architecture"
+                      "Up to speed in a week",
+                      "Phased, forward, and legal deployment",
+                      "More profitable per unit after savings",
+                      "Attract better tenants, offboard the bad ones",
+                      "Tenants don't feel the surveillance, just the security"
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3 text-zinc-300">
-                        <CheckCircle2 className="text-green-500 w-5 h-5" />
+                        <CheckCircle2 className="text-brand-orange w-5 h-5 shrink-0" />
                         {item}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="flex-1 relative">
-                  <div className="aspect-square bg-gradient-to-br from-orange-600/20 to-blue-600/20 rounded-3xl border border-white/10 flex items-center justify-center p-12">
-                    <div className="relative w-full h-full bg-black/40 rounded-2xl border border-white/20 backdrop-blur-xl flex flex-col items-center justify-center text-center p-8">
-                      <Camera className="w-16 h-16 text-orange-500 mb-6 animate-pulse" />
-                      <div className="font-mono text-xs text-zinc-500 mb-2">SYSTEM_LOG: ENCRYPTED</div>
-                      <div className="text-sm font-medium text-zinc-300">
-                        Privacy Shield Active. <br />
-                        Monitoring 3875 Ruby St.
+                  <div className="aspect-square bg-gradient-to-br from-brand-orange/20 to-brand-silver/20 rounded-3xl border border-white/10 flex items-center justify-center p-12 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30 mix-blend-overlay" />
+                    <div className="relative w-full h-full bg-black/60 rounded-2xl border border-white/20 backdrop-blur-xl flex flex-col items-center justify-center text-center p-8 shadow-2xl">
+                      <Shield className="w-16 h-16 text-brand-orange mb-6" />
+                      <div className="font-mono text-sm text-brand-silver mb-2 tracking-widest uppercase">Undefeatable Papertrail</div>
+                      <div className="text-lg font-bold text-white mb-4">
+                        Digital Safeguards Active
+                      </div>
+                      <div className="bg-white/5 border border-white/10 rounded-lg p-4 w-full text-left font-mono text-xs text-zinc-400 space-y-2">
+                        <div className="flex justify-between"><span>Timestamp:</span> <span className="text-brand-orange">{new Date().toISOString().split('T')[0]} {new Date().toLocaleTimeString()}</span></div>
+                        <div className="flex justify-between"><span>Event:</span> <span className="text-white">Verified Sublease Violation</span></div>
+                        <div className="flex justify-between"><span>Evidence:</span> <span className="text-green-400">Secured & Encrypted</span></div>
                       </div>
                     </div>
                   </div>
@@ -1205,16 +1219,19 @@ export default function App() {
             {/* CTA Section */}
             <section className="py-32">
               <div className="max-w-5xl mx-auto px-6">
-                <div className="bg-gradient-to-r from-orange-600 to-orange-800 rounded-[2rem] p-12 md:p-20 text-center relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-                  <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 relative z-10">
-                    Ready to secure your property?
+                <div className="bg-gradient-to-r from-brand-orange to-orange-800 rounded-[2rem] p-12 md:p-20 text-center relative overflow-hidden border border-orange-500/30">
+                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
+                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 blur-3xl rounded-full" />
+                  
+                  <h2 className="text-4xl md:text-6xl font-black text-white mb-6 relative z-10 tracking-tighter">
+                    PAY BACK PACKAGE
                   </h2>
-                  <p className="text-xl text-orange-100 mb-10 max-w-2xl mx-auto relative z-10">
-                    Join the future of Oakland property management. Secure, smart, and privacy-focused.
+                  <p className="text-2xl font-bold text-orange-100 mb-10 max-w-2xl mx-auto relative z-10">
+                    Thank you! SILVERBACK has it from here.
                   </p>
-                  <button className="bg-white text-orange-700 px-10 py-5 rounded-2xl font-bold text-xl hover:bg-zinc-100 transition-all relative z-10 shadow-2xl">
-                    Contact Sales
+                  <button className="bg-black text-white border border-white/20 px-10 py-5 rounded-2xl font-bold text-xl hover:bg-zinc-900 transition-all relative z-10 shadow-[0_0_40px_rgba(0,0,0,0.5)] flex items-center gap-3 mx-auto">
+                    <Zap className="w-6 h-6 text-brand-orange" />
+                    Deploy to 3875 Ruby St
                   </button>
                 </div>
               </div>
