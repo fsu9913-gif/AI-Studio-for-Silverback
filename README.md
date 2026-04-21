@@ -18,3 +18,20 @@ View your app in AI Studio: https://ai.studio/apps/d3deeaf9-500c-40a5-a8f4-39a75
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+---
+
+## Time Sheets by Silverback — prototype
+
+This branch also contains a visual prototype of **Time Sheets by Silverback**
+(a separate product — time-and-labor SaaS for field-service crews) under
+[`/timesheets/`](./timesheets/). It's a self-contained Vite + React app with
+its own `package.json` and does not touch the surveillance app above.
+
+```bash
+cd timesheets
+npm install
+npm run dev   # open http://localhost:5173
+```
+
+See [`timesheets/README.md`](./timesheets/README.md) for deploy options.
