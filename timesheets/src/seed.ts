@@ -15,24 +15,26 @@ export type JobSite = {
 };
 
 export const COMPANY = {
-  name: 'Orosco Landscaping',
-  slug: 'orosco',
-  tagline: 'Oakland, CA',
+  name: 'Orozco Landscaping',
+  slug: 'orozco',
+  tagline: 'Sunnyvale, CA',
+  phone: '(408) 205-8417',
+  email: 'migueob89@gmail.com',
 };
 
 export const EMPLOYEES: Employee[] = [
-  { id: 'e1', name: 'Guadalajara', role: 'Capataz',   hourlyRate: 32 },
-  { id: 'e2', name: 'Monterrey',   role: 'Cuadrilla', hourlyRate: 24 },
-  { id: 'e3', name: 'Puebla',      role: 'Cuadrilla', hourlyRate: 22 },
-  { id: 'e4', name: 'Oaxaca',      role: 'Cuadrilla', hourlyRate: 22 },
-  { id: 'e5', name: 'Mérida',      role: 'Cuadrilla', hourlyRate: 22 },
+  { id: 'e1', name: 'Chávez',  role: 'Capataz',   hourlyRate: 32 },
+  { id: 'e2', name: 'Canelo',  role: 'Cuadrilla', hourlyRate: 24 },
+  { id: 'e3', name: 'Márquez', role: 'Cuadrilla', hourlyRate: 22 },
+  { id: 'e4', name: 'Morales', role: 'Cuadrilla', hourlyRate: 22 },
+  { id: 'e5', name: 'Barrera', role: 'Cuadrilla', hourlyRate: 22 },
 ];
 
 export const JOB_SITES: JobSite[] = [
-  { id: 's1', name: 'Woodside Residence', client: 'Henderson',       address: '1421 Kings Mountain Rd, Woodside, CA' },
-  { id: 's2', name: 'Piedmont HOA',        client: 'Piedmont Board',  address: '400 Highland Ave, Piedmont, CA' },
-  { id: 's3', name: 'Claremont Hotel',     client: 'Fairmont Props',  address: '41 Tunnel Rd, Berkeley, CA' },
-  { id: 's4', name: 'Montclair Estate',    client: 'Yamamoto',        address: '6232 Moraga Ave, Oakland, CA' },
+  { id: 's1', name: 'Sunnyvale Residence',  client: 'Henderson',      address: '652 W Remington Dr, Sunnyvale, CA' },
+  { id: 's2', name: 'Los Altos Estate',     client: 'Yamamoto',       address: '1150 University Ave, Los Altos, CA' },
+  { id: 's3', name: 'Cupertino HOA',         client: 'Rivermark Board', address: '10185 N Stelling Rd, Cupertino, CA' },
+  { id: 's4', name: 'Mountain View Duplex', client: 'Patel',          address: '475 Castro St, Mountain View, CA' },
 ];
 
 // Pre-populated fake weekly hours (for "Mis horas esta semana" + owner reports)
