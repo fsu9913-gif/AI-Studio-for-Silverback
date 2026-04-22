@@ -1,0 +1,75 @@
+name: Deploy silverbackai.agency
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'homepage/**'
+      - 'orozco/**'
+      - 'firebase.json'
+      - '.firebaserc'
+      - '.github/workflows/deploy-silverbackai.yml'
+  pull_request:
+    paths:
+      - 'homepage/**'
+      - 'orozco/**'
+      - 'firebase.json'
+      - '.firebaserc'
+      - '.github/workflows/deploy-silverbackai.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: silverbackai-hosting
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install homepage deps
+        working-directory: homepage
+        run: npm ci
+
+      - name: Install orozco deps
+        working-directory: orozco
+        run: npm ci
+
+      - name: Build homepage (served at /)
+        working-directory: homepage
+        env:
+          VITE_BASE_PATH: /
+        run: npm run build
+
+      - name: Build orozco (served at /orozco/)
+        working-directory: orozco
+        env:
+          VITE_BASE_PATH: /orozco/
+        run: npm run build
+
+      - name: Assemble public_dist
+        run: |
+          set -euo pipefail
+          rm -rf public_dist
+          mkdir -p public_dist
+          cp -r homepage/dist/. public_dist/
+          mkdir -p public_dist/orozco
+          cp -r orozco/dist/. public_dist/orozco/
+
+      - name: Deploy to Firebase Hosting (live on main, preview on PR)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SILVERBACKAI }}
+          channelId: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'live' || '' }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
