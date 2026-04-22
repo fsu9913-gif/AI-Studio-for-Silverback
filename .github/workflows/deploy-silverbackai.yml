@@ -66,7 +66,14 @@ jobs:
           mkdir -p public_dist/orozco
           cp -r orozco/dist/. public_dist/orozco/
 
+      - name: Skip deploy if Firebase isn't wired up yet
+        if: vars.FIREBASE_PROJECT_ID == ''
+        run: |
+          echo "::warning::FIREBASE_PROJECT_ID repo variable is not set — skipping deploy step."
+          echo "To enable deploys: add repo variable FIREBASE_PROJECT_ID and repo secret FIREBASE_SERVICE_ACCOUNT_SILVERBACKAI."
+
       - name: Deploy to Firebase Hosting (live on main, preview on PR)
+        if: vars.FIREBASE_PROJECT_ID != ''
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
