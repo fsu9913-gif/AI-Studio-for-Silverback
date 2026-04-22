@@ -22,8 +22,8 @@ export function NameGrid() {
       </div>
 
       <main className="flex-1 px-5 py-6 max-w-md mx-auto w-full">
-        <h1 className="text-2xl font-bold text-text">Who's clocking in?</h1>
-        <p className="text-sm text-text-muted mt-1">Tap your name to get started.</p>
+        <h1 className="text-2xl font-bold text-text">¿Quién entra?</h1>
+        <p className="text-sm text-text-muted mt-1">Toca tu nombre para comenzar.</p>
 
         <ul className="mt-6 bg-white rounded-lg border border-border overflow-hidden">
           {employees.map((e, i) => (
@@ -46,7 +46,7 @@ export function NameGrid() {
         </ul>
 
         <p className="mt-6 text-center text-xs text-text-light">
-          Demo PIN for everyone: <span className="tabular font-semibold text-text-muted">0000</span>
+          PIN de demo para todos: <span className="tabular font-semibold text-text-muted">0000</span>
         </p>
       </main>
     </div>

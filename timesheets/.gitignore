@@ -1,0 +1,4 @@
+# timesheets-local ignores. Root .gitignore already ignores node_modules/
+# and dist/ globally. Override dist-ignore here ONLY for preview/ so the
+# raw.githack CDN preview can serve files straight out of the repo.
+!preview/

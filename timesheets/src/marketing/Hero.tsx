@@ -23,11 +23,11 @@ export function Hero() {
                 Try the crew demo <ArrowRight size={18} />
               </Button>
             </Link>
-            <a href="#pricing">
+            <Link to="/reports">
               <Button size="lg" variant="secondary">
-                See pricing
+                See the owner report
               </Button>
-            </a>
+            </Link>
           </div>
           <p className="mt-4 text-xs text-text-light">
             Demo PIN for every crew member: <span className="tabular font-semibold text-text-muted">0000</span>
@@ -48,14 +48,14 @@ function PhoneMock() {
           <div className="bg-white px-5 py-4 flex items-center justify-between border-b border-border-light">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-navy text-white text-xs font-semibold flex items-center justify-center">
-                JR
+                G
               </div>
               <div className="leading-tight">
-                <div className="text-sm font-semibold">Juan Ramirez</div>
-                <div className="text-[11px] text-text-muted">Foreman</div>
+                <div className="text-sm font-semibold">Guadalajara</div>
+                <div className="text-[11px] text-text-muted">Capataz</div>
               </div>
             </div>
-            <span className="text-xs text-primary font-semibold">Working</span>
+            <span className="text-xs text-primary font-semibold">Trabajando</span>
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center px-5">
@@ -66,24 +66,24 @@ function PhoneMock() {
               04:17:32
             </div>
             <div className="mt-3 inline-flex items-center gap-1.5 bg-success-light text-success rounded-full px-2.5 py-1 text-[11px] font-semibold">
-              ✓ On site
+              ✓ En el sitio
             </div>
           </div>
 
           <div className="p-5 space-y-3">
             <div className="grid grid-cols-3 gap-2">
               <div className="h-11 rounded-md border border-border bg-white text-xs font-semibold text-text-muted flex items-center justify-center">
-                Break 1
+                Descanso 1
               </div>
               <div className="h-11 rounded-md bg-warning-light border border-warning text-warning text-xs font-semibold flex items-center justify-center">
-                Lunch
+                Almuerzo
               </div>
               <div className="h-11 rounded-md border border-border bg-white text-xs font-semibold text-text-muted flex items-center justify-center">
-                Break 2
+                Descanso 2
               </div>
             </div>
             <div className="h-12 rounded-md bg-danger text-white text-sm font-semibold flex items-center justify-center">
-              Clock out
+              Terminar turno
             </div>
           </div>
         </div>

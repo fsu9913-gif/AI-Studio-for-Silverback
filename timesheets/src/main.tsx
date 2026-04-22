@@ -1,20 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import App from './App';
 import { StoreProvider } from './lib/store';
 import './index.css';
 
-// Honor Vite's base path (e.g. "/ai-studio-for-silverback/" on GitHub Pages)
-// so all Link hrefs and route matching are relative to the sub-path.
-const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+// HashRouter is used for the no-server CDN preview (raw.githack / statically.io
+// can't do SPA fallback). BrowserRouter is used for real hosting (Pages, Vercel).
+const useHashRouter = import.meta.env.VITE_USE_HASH_ROUTER === '1';
+const Router = useHashRouter ? HashRouter : BrowserRouter;
+const basename = useHashRouter
+  ? undefined
+  : import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    <Router basename={basename}>
       <StoreProvider>
         <App />
       </StoreProvider>
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
 );

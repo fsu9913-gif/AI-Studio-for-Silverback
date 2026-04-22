@@ -25,7 +25,7 @@ export function PinPad() {
         signIn(employee!.id);
         navigate('/app/sites');
       } else {
-        setError('Try again');
+        setError('Intenta de nuevo');
         setShaking(true);
         setTimeout(() => {
           setDigits('');
@@ -56,12 +56,12 @@ export function PinPad() {
         <div className="px-5 h-14 flex items-center gap-3">
           <Link
             to="/app"
-            aria-label="Back"
+            aria-label="Atrás"
             className="w-9 h-9 inline-flex items-center justify-center text-text-muted hover:text-text"
           >
             <ArrowLeft size={18} />
           </Link>
-          <span className="text-sm font-semibold text-text">Enter PIN</span>
+          <span className="text-sm font-semibold text-text">Ingresa tu PIN</span>
         </div>
       </div>
 
@@ -101,7 +101,7 @@ export function PinPad() {
           ))}
           <div />
           <KeypadButton onClick={() => onDigit('0')}>0</KeypadButton>
-          <KeypadButton onClick={onDelete} aria-label="Delete last digit">
+          <KeypadButton onClick={onDelete} aria-label="Borrar último dígito">
             <Delete size={22} />
           </KeypadButton>
         </div>

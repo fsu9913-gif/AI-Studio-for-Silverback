@@ -31,7 +31,7 @@ export function SitePicker() {
         <div className="px-5 h-14 flex items-center gap-3">
           <Link
             to="/app"
-            aria-label="Back"
+            aria-label="Atrás"
             className="w-9 h-9 inline-flex items-center justify-center text-text-muted hover:text-text"
           >
             <ArrowLeft size={18} />
@@ -47,9 +47,9 @@ export function SitePicker() {
       </div>
 
       <main className="flex-1 px-5 py-6 max-w-md mx-auto w-full">
-        <h1 className="text-2xl font-bold text-text">Where are you working?</h1>
+        <h1 className="text-2xl font-bold text-text">¿Dónde estás trabajando?</h1>
         <p className="text-sm text-text-muted mt-1">
-          Pick a job site to charge your time to.
+          Elige el sitio de trabajo.
         </p>
 
         <ul className="mt-6 bg-white rounded-lg border border-border overflow-hidden">

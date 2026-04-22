@@ -27,30 +27,30 @@ export function MyWeek() {
         <div className="px-5 h-14 flex items-center gap-3">
           <Link
             to="/app/clock"
-            aria-label="Back"
+            aria-label="Atrás"
             className="w-9 h-9 inline-flex items-center justify-center text-text-muted hover:text-text"
           >
             <ArrowLeft size={18} />
           </Link>
-          <span className="text-sm font-semibold text-text">My hours this week</span>
+          <span className="text-sm font-semibold text-text">Mis horas esta semana</span>
         </div>
       </div>
 
       <main className="flex-1 px-5 py-6 max-w-md mx-auto w-full">
         <div className="grid grid-cols-2 gap-3">
-          <Stat label="Total hours" value={formatHours(totalHours)} />
-          <Stat label="Est. pay" value={formatMoney(earnings)} />
-          <Stat label="Regular" value={formatHours(regularHours)} />
-          <Stat label="Overtime" value={formatHours(otHours)} />
+          <Stat label="Horas totales" value={formatHours(totalHours)} />
+          <Stat label="Pago est." value={formatMoney(earnings)} />
+          <Stat label="Regulares" value={formatHours(regularHours)} />
+          <Stat label="Tiempo extra" value={formatHours(otHours)} />
         </div>
 
         <h2 className="mt-8 mb-3 text-sm font-semibold uppercase tracking-wide text-text-muted">
-          Recent shifts
+          Turnos recientes
         </h2>
         <ul className="bg-white rounded-lg border border-border overflow-hidden">
           {myShifts.length === 0 && (
             <li className="px-4 py-6 text-sm text-text-muted text-center">
-              No shifts logged yet this week.
+              No hay turnos esta semana.
             </li>
           )}
           {myShifts.map((s, i) => {
@@ -73,7 +73,7 @@ export function MyWeek() {
         </ul>
 
         <p className="mt-6 text-center text-xs text-text-light">
-          Numbers shown are demo data. Real app pulls from your live shift log.
+          Datos de demo. La app real toma los datos de tu registro en vivo.
         </p>
       </main>
     </div>
@@ -93,7 +93,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function formatDate(iso: string): string {
   const d = new Date(iso + 'T12:00:00');
-  return d.toLocaleDateString('en-US', {
+  return d.toLocaleDateString('es-MX', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',

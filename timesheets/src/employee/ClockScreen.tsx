@@ -46,15 +46,15 @@ export function ClockScreen() {
   const earningsToday = (elapsedMs / 3_600_000) * employee.hourlyRate;
 
   const onSignOut = () => {
-    if (window.confirm('Sign out without clocking out? Your shift will still be running.')) {
+    if (window.confirm('¿Salir sin terminar turno? Tu turno seguirá corriendo.')) {
       signOut();
       navigate('/app');
     }
   };
 
   const onClockOut = () => {
-    if (!window.confirm('Clock out for the day?')) return;
-    const msg = `Clocked out. ${formatDuration(elapsedMs)} on the clock · ${formatMoney(earningsToday)}`;
+    if (!window.confirm('¿Terminar turno por hoy?')) return;
+    const msg = `Turno terminado. ${formatDuration(elapsedMs)} trabajadas · ${formatMoney(earningsToday)}`;
     clockOut();
     navigate('/app');
     window.setTimeout(() => window.alert(msg), 50);
@@ -75,28 +75,28 @@ export function ClockScreen() {
             onClick={onSignOut}
             className="text-xs font-semibold text-text-muted hover:text-danger inline-flex items-center gap-1"
           >
-            <LogOut size={14} /> Sign out
+            <LogOut size={14} /> Salir
           </button>
         </div>
       </div>
 
       <main className="flex-1 px-5 py-6 max-w-md mx-auto w-full flex flex-col">
         <StatusCard
-          status={openBreak ? `On ${labelForBreak(openBreak)}` : 'Working'}
+          status={openBreak ? statusForBreak(openBreak) : 'Trabajando'}
           elapsedMs={elapsedMs}
-          siteName={site?.name ?? 'Unknown site'}
+          siteName={site?.name ?? 'Sitio desconocido'}
           tone={openBreak ? 'warning' : 'primary'}
         />
 
         <div className="mt-4 flex items-center justify-between text-xs text-text-muted px-1">
-          <span>Today so far</span>
+          <span>Hoy hasta ahora</span>
           <span className="tabular font-semibold text-text">{formatMoney(earningsToday)}</span>
         </div>
 
         <div className="mt-6 flex-1 flex flex-col justify-end gap-3">
           {openBreak ? (
             <Button size="xl" variant="warning" full onClick={endBreak}>
-              End break · Back to work <ArrowRight size={18} />
+              Terminar descanso · Volver al trabajo <ArrowRight size={18} />
             </Button>
           ) : (
             <>
@@ -119,7 +119,7 @@ export function ClockScreen() {
               </div>
 
               <Button size="xl" variant="danger" full onClick={onClockOut}>
-                Clock out
+                Terminar turno
               </Button>
             </>
           )}
@@ -130,7 +130,7 @@ export function ClockScreen() {
             to="/app/week"
             className="text-xs font-semibold text-primary hover:text-primary-dark"
           >
-            My hours this week →
+            Mis horas esta semana →
           </Link>
         </div>
       </main>
@@ -152,7 +152,7 @@ function StatusCard({
   return (
     <div className="rounded-lg bg-white border border-border p-6 text-center">
       <div className="text-[11px] uppercase tracking-wide font-semibold text-text-muted mb-1">
-        Status
+        Estado
       </div>
       <Pill tone={tone}>{status}</Pill>
       <div className="mt-5 tabular font-mono font-bold text-5xl text-text">
@@ -163,7 +163,7 @@ function StatusCard({
         <span className="font-medium text-text">{siteName}</span>
       </div>
       <div className="mt-2 inline-flex">
-        <Pill tone="success">✓ On site</Pill>
+        <Pill tone="success">✓ En el sitio</Pill>
       </div>
     </div>
   );
@@ -192,21 +192,21 @@ function BreakButton({
       disabled={taken}
       onClick={onClick}
       className={`${base} ${taken ? disabledCls : active}`}
-      aria-label={taken ? `${label} already taken` : `Start ${label.toLowerCase()}`}
+      aria-label={taken ? `${label} ya tomado` : `Iniciar ${label.toLowerCase()}`}
     >
       <Icon size={18} />
       <span>{label}</span>
-      {taken && <span className="text-[10px] font-medium opacity-80">Taken</span>}
+      {taken && <span className="text-[10px] font-medium opacity-80">Tomado</span>}
     </button>
   );
 }
 
 const BREAK_META: Record<BreakKind, { label: string; Icon: typeof Coffee }> = {
-  break1: { label: 'Break 1', Icon: Coffee },
-  lunch:  { label: 'Lunch',   Icon: UtensilsCrossed },
-  break2: { label: 'Break 2', Icon: CupSoda },
+  break1: { label: 'Descanso 1', Icon: Coffee },
+  lunch:  { label: 'Almuerzo',   Icon: UtensilsCrossed },
+  break2: { label: 'Descanso 2', Icon: CupSoda },
 };
 
-function labelForBreak(k: BreakKind): string {
-  return BREAK_META[k].label.toLowerCase();
+function statusForBreak(k: BreakKind): string {
+  return k === 'lunch' ? 'En almuerzo' : 'En descanso';
 }

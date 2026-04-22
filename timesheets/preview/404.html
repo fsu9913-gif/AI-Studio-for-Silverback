@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Time Sheets by Silverback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // SPA fallback for GitHub Pages (project sites). Preserves the
+      // requested path via query string; index.html restores it on load.
+      // Canonical pattern: https://github.com/rafgraph/spa-github-pages
+      // pathSegmentsToKeep = 1 because the site lives at /<repo>/.
+      (function () {
+        var segmentsToKeep = 1;
+        var l = window.location;
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          l.pathname.split('/').slice(0, 1 + segmentsToKeep).join('/') + '/?/' +
+          l.pathname.slice(1).split('/').slice(segmentsToKeep).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

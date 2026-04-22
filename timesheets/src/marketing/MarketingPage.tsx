@@ -17,6 +17,12 @@ export function MarketingPage() {
                   Pricing
                 </a>
                 <Link
+                  to="/reports"
+                  className="text-text-muted hover:text-text font-medium"
+                >
+                  Reports
+                </Link>
+                <Link
                   to="/app"
                   className="text-primary font-semibold hover:text-primary-dark"
                 >
