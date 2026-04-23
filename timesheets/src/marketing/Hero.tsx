@@ -8,14 +8,14 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-6 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-primary-light text-primary-dark rounded-full px-3 py-1 text-xs font-semibold mb-5">
-            <ShieldCheck size={14} /> Website + Google Business Profile included free
+            <ShieldCheck size={14} /> A Silverback tool · Built for California field crews
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.08] text-text tracking-tight">
-            Run your crew. Show up on Google. One bill.
+            The time clock your crew actually wants to use.
           </h1>
           <p className="mt-5 text-lg text-text-muted max-w-xl">
-            Time Sheets for field-service teams in California — plus a one-page website and
-            a verified Google Business Profile, built for you. $299 first month, $199/mo after.
+            Timeclock by Silverback. PIN clock-in from any phone, live labor cost per job,
+            CA Labor Code compliance, payroll-ready CSV. $199/month, no setup fee.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/app">
